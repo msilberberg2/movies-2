@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+
+<title>module DataLoad - RDoc Documentation</title>
+
+<link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="./js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/darkfish.js"></script>
+
+
+<body id="top" class="module">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="./index.html">Home</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>DataLoad.rb
+  </ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    
+    
+    
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li ><a href="#method-c-load_movie_user">::load_movie_user</a>
+    
+    <li ><a href="#method-c-load_usermovie_rating">::load_usermovie_rating</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="./DataLoad.html">DataLoad</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="module">module DataLoad</h1>
+
+  <div id="description" class="description">
+    
+<p>Given a movie rating file, this module loads the data from the file into
+appropriate hashes.</p>
+
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    <!-- Methods -->
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Class Methods</h3>
+
+    
+      <div id="method-c-load_movie_user" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">load_movie_user</span><span
+            class="method-args">(folder, file_name)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Loads data from the given file into a hash, where each key is a movie and
+each value is an array of all the users#that have given that movie a
+rating.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="load_movie_user-source">
+            <pre><span class="ruby-comment"># File DataLoad.rb, line 21</span>
+<span class="ruby-keyword">def</span> <span class="ruby-constant">DataLoad</span>.<span class="ruby-identifier">load_movie_user</span>(<span class="ruby-identifier">folder</span>, <span class="ruby-identifier">file_name</span>)
+        <span class="ruby-comment">#movie_user is a two-dimensional hash, where each key is a movie and each value is an array of all the users</span>
+        <span class="ruby-comment">#that have given that movie a rating.</span>
+        <span class="ruby-identifier">movie_user</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
+        <span class="ruby-identifier">data</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-node">&quot;#{folder}/#{file_name}&quot;</span>)
+        <span class="ruby-identifier">data</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">data_line</span><span class="ruby-operator">|</span>
+                <span class="ruby-identifier">data_array</span> = <span class="ruby-identifier">data_line</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39; &#39;</span>)
+                <span class="ruby-identifier">user</span> = <span class="ruby-identifier">data_array</span>[<span class="ruby-value">0</span>]
+                <span class="ruby-identifier">movie</span> = <span class="ruby-identifier">data_array</span>[<span class="ruby-value">1</span>]
+                <span class="ruby-keyword">if</span> <span class="ruby-identifier">movie_user</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">movie</span>) <span class="ruby-operator">==</span> <span class="ruby-keyword">false</span>
+                        <span class="ruby-identifier">movie_user</span>[<span class="ruby-identifier">movie</span>] = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
+                <span class="ruby-keyword">end</span>
+                <span class="ruby-identifier">movie_user</span>[<span class="ruby-identifier">movie</span>].<span class="ruby-identifier">push</span>(<span class="ruby-identifier">user</span>)
+        <span class="ruby-keyword">end</span>
+        <span class="ruby-identifier">data</span>.<span class="ruby-identifier">close</span>
+        <span class="ruby-keyword">return</span> <span class="ruby-identifier">movie_user</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- load_movie_user-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- load_movie_user-method -->
+
+    
+      <div id="method-c-load_usermovie_rating" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">load_usermovie_rating</span><span
+            class="method-args">(folder, file_name)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Loads data from the given file into a hash with the pair “user movie” as
+the key and “rating” as the value.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="load_usermovie_rating-source">
+            <pre><span class="ruby-comment"># File DataLoad.rb, line 4</span>
+<span class="ruby-keyword">def</span> <span class="ruby-constant">DataLoad</span>.<span class="ruby-identifier">load_usermovie_rating</span>(<span class="ruby-identifier">folder</span>, <span class="ruby-identifier">file_name</span>)
+        <span class="ruby-identifier">usermovie_rating</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
+        <span class="ruby-identifier">data</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-node">&quot;#{folder}/#{file_name}&quot;</span>)
+        <span class="ruby-comment">#The 0th element of data_line is the user. The 1st is the movie. The 2nd is the rating.</span>
+        <span class="ruby-identifier">data</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">data_line</span><span class="ruby-operator">|</span>
+                <span class="ruby-identifier">data_array</span> = <span class="ruby-identifier">data_line</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39; &#39;</span>)
+                <span class="ruby-identifier">user</span> = <span class="ruby-identifier">data_array</span>[<span class="ruby-value">0</span>]
+                <span class="ruby-identifier">movie</span> = <span class="ruby-identifier">data_array</span>[<span class="ruby-value">1</span>]
+                <span class="ruby-identifier">score</span> = <span class="ruby-identifier">data_array</span>[<span class="ruby-value">2</span>]
+                <span class="ruby-comment">#usermovie_rating has the pair &quot;user movie&quot; as the key and &quot;score&quot; as the value.</span>
+                <span class="ruby-identifier">usermovie_rating</span>[<span class="ruby-node">&quot;#{user} #{movie}&quot;</span>] = <span class="ruby-identifier">score</span>
+        <span class="ruby-keyword">end</span>
+        <span class="ruby-identifier">data</span>.<span class="ruby-identifier">close</span>
+        <span class="ruby-keyword">return</span> <span class="ruby-identifier">usermovie_rating</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- load_usermovie_rating-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- load_usermovie_rating-method -->
+
+    
+    </section><!-- public-class-method-details -->
+  
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 4.0.0.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+
